@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
  
 class SauceFixtures extends Fixture
 {
-    private const SAUCE_REFERENCE = 'Sauce';
+    public const SAUCE_REFERENCE = 'Sauce';
     
     public function load(ObjectManager $manager)
     {

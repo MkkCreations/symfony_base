@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BurgerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BurgerRepository::class)]
@@ -26,16 +28,21 @@ class Burger
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\ManyToMany(targetEntity: Oignon::class)]
-    private ?array $oignon = null;
+    private ?Oignon $oignon = null;
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\OneToMany(targetEntity: Sauce::class, mappedBy: 'burger')]
-    private ?array $sauce = null;
+    private ?Collection $sauce;
 
     #[ORM\JoinColumn(nullable: true)]
-    #[ORM\OneToOne(targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
-    private ?array $commentaire = null;
+    #[ORM\OneToMany(targetEntity: Commentaire::class, cascade: ['persist', 'remove'], mappedBy: 'burger')]
+    private ?Collection $commentaire;
     
+    public function __construct()
+    {
+        $this->sauce = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -65,4 +72,66 @@ class Burger
 
         return $this;
     }
+
+    public function getPain(): ?Pain
+    {
+        return $this->pain;
+    }
+
+    public function setPain(Pain $pain): static
+    {
+        $this->pain = $pain;
+
+        return $this;
+    }
+
+    public function getOignon(): ?Oignon
+    {
+        return $this->oignon;
+    }
+
+    public function setOignon(Oignon $oignon): static
+    {
+        $this->oignon = $oignon;
+
+        return $this;
+    }
+
+    public function getSauce(): Collection | Sauce
+    {
+        return $this->sauce;
+    }
+
+    public function setSauce(Collection $sauce): static
+    {
+        $this->sauce = $sauce;
+
+        return $this;
+    }
+    public function addSauce(Sauce $sauce): static
+    {
+        $this->sauce->add($sauce);
+
+        return $this;
+    }
+
+    public function getCommentaire(): Collection | Commentaire
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(Collection  $commentaire): static
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function addcommentaire(Commentaire $commentaire): static
+    {
+        $this->commentaire->add($commentaire);
+
+        return $this;
+    }
+
 }

@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class OignonFixtures extends Fixture
 {
-    private const OIGNON_REFERENCE = 'Oignon';
+    public const OIGNON_REFERENCE = 'Oignon';
     
     public function load(ObjectManager $manager)
     {

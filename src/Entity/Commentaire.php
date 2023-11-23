@@ -17,7 +17,7 @@ class Commentaire
     private ?string $message = null;
 
     #[ORM\JoinColumn(nullable: true)]
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
     private ?Burger $burger = null;
 
     public function getId(): ?int
