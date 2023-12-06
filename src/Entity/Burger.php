@@ -28,7 +28,7 @@ class Burger
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\ManyToMany(targetEntity: Oignon::class)]
-    private ?Oignon $oignon = null;
+    private ?Collection $oignon = null;
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\OneToMany(targetEntity: Sauce::class, mappedBy: 'burger')]
@@ -85,14 +85,20 @@ class Burger
         return $this;
     }
 
-    public function getOignon(): ?Oignon
+    public function getOignon(): ?Collection
     {
         return $this->oignon;
     }
 
-    public function setOignon(Oignon $oignon): static
+    public function setOignon(Collection $oignon): static
     {
         $this->oignon = $oignon;
+
+        return $this;
+    }
+    public function addOignon(Oignon $oignon): static
+    {
+        $this->oignon->add($oignon);
 
         return $this;
     }

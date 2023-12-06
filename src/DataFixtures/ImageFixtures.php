@@ -35,6 +35,8 @@ class ImageFixtures extends Fixture
             $image->setUrl($url['url']);
             $image->setAltText($url['altText']);
             $this->addReference(self::IMAGE_REFERENCE . '_' . $key, $image);
+            $manager->persist($image);
         }
+        $manager->flush();
     }
 }

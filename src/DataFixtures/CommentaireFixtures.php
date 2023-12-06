@@ -22,6 +22,8 @@ class CommentaireFixtures extends Fixture
             $commentaire->setMessage($message);
             $manager->persist($commentaire);
             $this->addReference(self::COMMENTAIRE_REFERENCE . '_' . $key, $commentaire);
+            $manager->persist($commentaire);
         }
+        $manager->flush();
     }
 }

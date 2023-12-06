@@ -14,7 +14,7 @@ class BurgerController extends AbstractController
     public function list(BurgerRepository $burgerRepository): Response
     {
         $burgers = $burgerRepository->findAll();
-
+        dd($burgers);
         return $this->render('burger/list.html.twig', [
             'burgers' => $burgers,
         ]);

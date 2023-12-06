@@ -20,11 +20,16 @@
             {% for burger in burgers %}
                 <div class="card">
                     <div class="card-header">
-                        {{ burger.name }}
+                        {{ burger.nom }}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{burger.price}}</h5>
-                        <p class="card-text">{{burger.description}}</p>
+                    {% if burger.ognion == true %}
+                        {% for i in 1..burger.ognion %}
+                            <h5 class="card-title">{{burger.ognion[i]}}</h5>
+                        {% endfor %}
+                    {% endif %}
+
+                        <p class="card-text">{{burger.pain}}</p>
                         <a href="#" class="btn btn-primary">See details</a>
                     </div>
                 </div>

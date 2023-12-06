@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OignonRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OignonRepository::class)]
@@ -18,7 +19,7 @@ class Oignon
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\ManyToMany(targetEntity: Burger::class, cascade: ['persist', 'remove'])]
-    private ?Burger $burger = null;
+    private ?Collection $burger = null;
 
     public function getId(): ?int
     {
@@ -42,9 +43,16 @@ class Oignon
         return $this->burger;
     }
 
-    public function setBurger(Burger $burger): static
+    public function setBurger(Collection $burger): static
     {
         $this->burger = $burger;
+
+        return $this;
+    }
+
+    public function addBurger(Burger $burger): static
+    {
+        $this->burger->add($burger);
 
         return $this;
     }
